@@ -139,6 +139,19 @@ repositories {
     // flatDir {
     //     dir 'libs'
     // }
+
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        forRepositories(fg.repository) // Only add this if you're using ForgeGradle, otherwise remove this line
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
 }
 
 dependencies {
@@ -166,6 +179,7 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
+    implementation fg.deobf("maven.modrinth:shoulder-surfing-reloaded:${shoulder_surfing_reloaded_version}")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
